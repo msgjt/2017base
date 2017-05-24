@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="templates/template.xhtml">
+
+	<ui:define name="content">
+
+
+		<p:panelGrid columns="1">
+			<f:facet name="header">
+				<p:graphicImage library="img" name="company.png" />
+			</f:facet>
+		</p:panelGrid>
+
+
+
+		<p:panelGrid columns="2"
+			rendered="#{!userType.equals('administrator')}">
+			<h:outputText value="#{msg['managecompanies.companyName']}" />
+			<h:outputText value="#{company.companyName}" />
+
+			<h:outputText value="#{msg['managecompanies.address']}" />
+			<h:outputText value="#{company.address}" />
+
+			<h:outputText value="#{msg['managecompanies.email']}" />
+			<h:outputText value="#{company.email}" />
+
+			<h:outputText value="#{msg['managecompanies.status']}" />
+			<h:outputText value="#{company.status}" />
+		</p:panelGrid>
+
+	</ui:define>
+
+</ui:composition>

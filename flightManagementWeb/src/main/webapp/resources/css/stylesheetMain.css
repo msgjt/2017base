@@ -1,0 +1,186 @@
+body.ui-layout-container {
+	background: #32737d;
+}
+
+.ui-icon {
+	overflow: visible;
+	margin-right: 10px;
+	margin-left: 5px;
+}
+
+.ui-menu .ui-menuitem-text {
+	
+}
+
+.ui-slidemenu .ui-slidemenu-wrapper {
+	position: relative;
+	background-color: #4da0ce;
+}
+
+.ui-menuitem-link.ui-corner-all.ui-state-hover {
+	background-color: white;
+	background-image: none;
+}
+
+.languageMenu {
+	float: left;
+}
+
+.ui-selectonemenu-panel .ui-selectonemenu-table td {
+	border-style: none;
+	padding: 4px 10px 4px 10px;
+}
+
+.ui-selectonemenu-panel .ui-selectonemenu-item {
+	font-weight: normal;
+	border: none;
+	cursor: pointer;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default,
+	.ui-widget-header .ui-state-default {
+	border: none;
+	background: #4da0ce;
+	font-weight: bold;
+	color: #333333;
+	font-weight: bold;
+}
+
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active
+	{
+	border: none;
+	background: #4da0ce;
+	font-weight: bold;
+	color: #333333;
+	font-weight: bold;
+}
+
+.ui-widget-header {
+	background: #32737d;
+	color: white;
+}
+
+.ui-widget-content a {
+	color: rgba(0, 0, 0, 1);
+}
+
+.ui-button .ui-button-text {
+	display: block;
+	line-height: normal;
+	background: #32737d;
+	color: white;
+}
+
+.ui-button .ui-button-text:hover {
+	background: #585757;
+}
+
+.ui-button .ui-button-text:active {
+	background: #585757;
+}
+
+input[type="submit"] {
+	display: block;
+	line-height: normal;
+	background: #32737d;
+	color: white;
+	border-radius: 5px;
+}
+
+input[type="submit"]:hover {
+	background: #585757;
+}
+
+.buttonLink {
+	color: #252525;
+	background: #78bcc3;
+	padding: 5px;
+	text-decoration: none;
+	border-radius: 5px;
+}
+
+.buttonLink: hover {
+	color: white;
+	background: #585757;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	border-width: 0;
+}
+
+.ui-panelgrid {
+	margin: auto;
+	border-collapse: separate;
+}
+
+.ui-state-highlight, .ui-widget-content .ui-state-highlight,
+	.ui-widget-header .ui-state-highlight {
+	background: #4da0ce;
+	color: #363636;
+}
+
+.ui-state-highlight, .ui-widget-content .ui-state-highlight,
+	.ui-widget-header .ui-state-highlight:hover {
+	background: #4da0ce;
+}
+
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover,
+	.ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus
+	{
+	background: #4da0ce;
+	font-weight: bold;
+	color: #212121;
+	font-weight: bold;
+}
+
+.ui-widget-header .ui-icon {
+	background-color: inherit;
+}
+
+.ui-widget-content {
+	border: 1px solid #aaaaaa;
+	background: #e5edf1;
+}
+
+.ui-state-error, .ui-widget-content .ui-state-error, .ui-widget-header .ui-state-error
+	{
+	background: #e4828f;
+	color: black;
+}
+
+.ui-growl-image-error {
+	background-position: 0 0;
+	background: url("#{resource['img/icons/error.png']}");
+	background-size: cover;
+}
+
+.ui-growl-image-info {
+	background-position: 0 0;
+	background: url("#{resource['img/icons/info.png']}");
+	background-size: cover;
+}
+
+.ui-growl-image-warn {
+	background-position: 0 0;
+	background: url("#{resource['img/icons/warn.png']}");
+	background-size: cover;
+}
+
+.ui-state-highlight, .ui-widget-content .ui-state-highlight,
+	.ui-widget-header .ui-state-highlight {
+	border: none;
+}
+
+.ui-datatable {
+	margin-left: 5%;
+	margin-right: 5%;
+}
+
+.ui-datalist {
+	margin-left: 5%;
+	margin-right: 5%;
+}
+
+.ui-state-highlight .ui-icon {
+	
+}

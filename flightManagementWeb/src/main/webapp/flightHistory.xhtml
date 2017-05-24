@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	template="templates/template.xhtml">
+
+	<ui:define name="content">
+		<h:form id="form">
+			<p:dataList value="#{flightiHistoryBean.flightsHistoryList}"
+				var="flight" type="unordered" itemType="none" paginator="true"
+				rows="20" styleClass="paginated">
+				<f:facet name="header">
+            Flight History
+        </f:facet>
+				<p:commandLink update=":mainForm:form:flightDetail"
+					oncomplete="PF('flightDialog').show()" title="View Flight Detail"
+					styleClass="ui-icon ui-icon-search"
+					style="float:left;margin-right:10px">
+					<f:setPropertyActionListener value="#{flight}"
+						target="#{flightiHistoryBean.selectedFlight}" />
+					<h:outputText
+						value="#{flight.description}, #{flight.flight.flightId}" />
+				</p:commandLink>
+				<h:outputText
+					value="#{flight.description}, #{flight.flight.flightId}"
+					style="display:inline-block" />
+			</p:dataList>
+
+			<p:dialog header="Flight Detail" widgetVar="flightDialog"
+				showEffect="blind" hideEffect="explode" resizable="false"
+				height="350" width="500">
+
+				<p:outputPanel id="flightDetail" style="text-align:center;">
+					<p:panelGrid columns="2"
+						rendered="#{not empty flightiHistoryBean.selectedFlight}"
+						columnClasses="label,value">
+						<f:facet name="header">
+
+							<p:graphicImage library="img" name="planepic.jpg" />
+						</f:facet>
+
+						<h:outputText value="#{msg['myFlights.departure']}" />
+						<h:outputText
+							value="#{flightiHistoryBean.selectedFlight.flight.airport1.airportName}" />
+
+						<h:outputText value="#{msg['myFlights.arrival']}" />
+						<h:outputText
+							value="#{flightiHistoryBean.selectedFlight.flight.airport2.airportName}" />
+
+						<h:outputText value="#{msg['myFlights.departureTime']}" />
+						<h:outputText
+							value="#{flightiHistoryBean.selectedFlight.flight.startDate}" />
+
+						<h:outputText value="#{msg['myFlights.arrivalTime']}" />
+						<h:outputText
+							value="#{flightiHistoryBean.selectedFlight.flight.endDate}" />
+
+						<h:outputText value="#{msg['myFlights.plane']}" />
+						<h:outputText
+							value="#{flightiHistoryBean.selectedFlight.flight.plane.model}" />
+
+						<h:outputText value="#{msg['company.company']}" />
+						<h:outputText
+							value="#{flightiHistoryBean.selectedFlight.flight.company.companyName}" />
+
+					</p:panelGrid>
+				</p:outputPanel>
+			</p:dialog>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>

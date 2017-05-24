@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="templates/template.xhtml">
+
+	<ui:define name="content">
+
+		<h:form>
+			<center>
+				<h:outputText value=" #{viewFlightsBean.user.firstName} " />
+				<h:outputText value=" #{viewFlightsBean.user.lastName} " />
+				<h:outputText value="#{msg['myFlights.myFlights']}" />
+				<p></p>
+				<p:tabView activeIndex="1">
+					<p:tab title="#{msg['myFlights.pastFlights']}">
+
+						<p:accordionPanel value="#{viewFlightsBean.pastFlights}"
+							var="pastFlights" multiple="true" activeIndex="false">
+							<p:tab
+								title="#{pastFlights.startDate} - #{pastFlights.endDate}
+       			#{pastFlights.airport1.airportName} - #{pastFlights.airport2.airportName}">
+
+								<p:panelGrid columns="2" style="width: 100%"
+									columnClasses="forty-percent top-alignment, sixty-percent top-alignment">
+
+									<f:facet name="header">
+										<h:outputText value="#{msg['myFlights.details']}" />
+									</f:facet>
+
+									<h:outputText value="#{msg['myFlights.departure']}      " />
+									<h:outputText value="#{pastFlights.airport1.airportName}" />
+
+									<h:outputText value="#{msg['myFlights.arrival']}" />
+									<h:outputText value="#{pastFlights.airport2.airportName}" />
+
+									<h:outputText value="#{msg['myFlights.departureTime']}" />
+									<h:outputText value="#{pastFlights.startDate}" />
+
+									<h:outputText value="#{msg['myFlights.arrivalTime']}" />
+									<h:outputText value="#{pastFlights.endDate}" />
+
+									<h:outputText value="#{msg['myFlights.plane']}" />
+									<h:outputText value="#{pastFlights.plane.model}" />
+
+									<h:outputText value="#{msg['myFlights.crew']}" />
+									<p:dataTable var="users" value="#{pastFlights.users}"
+										emptyMessage="#{msg['reports.emptyMessage']}">
+
+										<f:facet name="header">
+											<h:outputText value="#{msg['myFlights.crewMembers']}" />
+										</f:facet>
+										<p:column>
+											<h:outputText value="#{users.firstName} #{users.lastName}" />
+										</p:column>
+									</p:dataTable>
+
+								</p:panelGrid>
+							</p:tab>
+						</p:accordionPanel>
+					</p:tab>
+
+					<p></p>
+					<p:tab title="#{msg['myFlights.upcomingFlights']}">
+						<p:accordionPanel value="#{viewFlightsBean.newFlights}"
+							var="flights" multiple="true" activeIndex="false">
+							<p:tab
+								title="#{flights.startDate} - #{flights.endDate}
+       			#{flights.airport1.airportName} - #{flights.airport2.airportName}">
+
+								<p:panelGrid columns="2">
+
+									<f:facet name="header">
+										<h:outputText value="#{msg['myFlights.details']}" />
+									</f:facet>
+
+									<h:outputText value="#{msg['myFlights.departure']}" />
+									<h:outputText value="#{flights.airport1.airportName}" />
+
+									<h:outputText value="#{msg['myFlights.arrival']}" />
+									<h:outputText value="#{flights.airport2.airportName}" />
+
+									<h:outputText value="#{msg['myFlights.departureTime']}" />
+									<h:outputText value="#{flights.startDate}" />
+
+									<h:outputText value="#{msg['myFlights.arrivalTime']}" />
+									<h:outputText value="#{flights.endDate}" />
+
+									<h:outputText value="#{msg['myFlights.plane']}" />
+									<h:outputText value="#{flights.plane.model}" />
+
+									<h:outputText value="#{msg['myFlights.crew']}" />
+									<p:dataTable styleClass="hide-column-names" var="nUsers"
+										value="#{flights.users}"
+										emptyMessage="#{msg['reports.emptyMessage']}">
+										<f:facet name="header">
+											<h:outputText value="#{msg['myFlights.crewMembers']}" />
+										</f:facet>
+										<p:column>
+											<h:outputText value="#{nUsers.firstName}  #{nUsers.lastName}" />
+										</p:column>
+									</p:dataTable>
+
+								</p:panelGrid>
+							</p:tab>
+						</p:accordionPanel>
+					</p:tab>
+				</p:tabView>
+			</center>
+		</h:form>
+
+
+	</ui:define>
+
+</ui:composition>

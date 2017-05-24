@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="templates/template.xhtml">
+
+	<ui:define name="content">
+
+
+
+		<h:form id="form">
+			<p:growl id="msgs" showDetail="true" />
+			<p:panelGrid columns="1">
+				<p:commandLink styleClass="buttonLink"
+					update=":mainForm:form:addPlane"
+					oncomplete="PF('addPlaneDialog').show()"
+					title="#{msg['op.addNewPlane']}" value="#{msg['op.addNewPlane']}">
+				</p:commandLink>
+			</p:panelGrid>
+
+			<p:dialog header="#{msg['op.addNewPlane']}"
+				widgetVar="addPlaneDialog" showEffect="blind" hideEffect="explode"
+				resizable="false" height="350" width="500">
+
+				<p:outputPanel id="addPlane" style="text-align:center;">
+					<h:panelGrid columns="2">
+
+						<p:outputLabel for="model" value="#{msg['plane.model']}"></p:outputLabel>
+						<p:inputText id="model" value="#{planesBean.model}">
+							<f:validator validatorId="PlaneModelValidator" />
+						</p:inputText>
+
+						<p:outputLabel for="capacity" value="#{msg['plane.capacity']}"></p:outputLabel>
+						<p:inputText id="capacity" value="#{planesBean.capacity}">
+							<f:validator validatorId="planeCapacityValidator" />
+						</p:inputText>
+
+						<p:outputLabel for="company" value="#{msg['company.company']}"></p:outputLabel>
+						<p:selectOneMenu id="company" value="#{planesBean.company}"
+							converter="companyConverter">
+							<f:selectItems value="#{planesBean.companyList}" var="company"
+								itemLabel="#{company.companyName}" itemValue="#{company}" />
+						</p:selectOneMenu>
+
+
+
+						<h:commandButton value="#{msg['op.insert']}"
+							action="#{planesBean.processInsert}" process="@this,addPlane">
+						</h:commandButton>
+
+					</h:panelGrid>
+				</p:outputPanel>
+			</p:dialog>
+		</h:form>
+
+		<h:form id="form2">
+			<p:growl id="msg" showDetail="true" />
+
+			<p:dataTable id="tbl" var="plane" value="#{planesBean.allPlanes}"
+				editable="true">
+
+				<f:facet name="header">
+					<h:outputText value="#{msg['plane.planeTable']}"></h:outputText>
+				</f:facet>
+
+				<p:ajax event="rowEdit" listener="#{planesBean.onRowEdit}"
+					update="#{p:component('msg')}" />
+				<p:ajax event="rowEditCancel" listener="#{planesBean.onRowCancel}"
+					update="#{p:component('msg')}" />
+
+				<p:column headerText="#{msg['plane.model']}">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{plane.model}" />
+							<p:graphicImage library="img" name="planepic.jpg" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{plane.model}" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column headerText="#{msg['plane.capacity']}">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{plane.capacity}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{plane.capacity}"
+								converter="javax.faces.Integer"
+								converterMessage="Please enter numeric only">
+								<f:validator validatorId="planeCapacityValidator" />
+							</p:inputText>
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column headerText="#{msg['plane.status']}">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{plane.status}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:selectOneMenu id="status" value="#{plane.status}">
+								<f:selectItem itemLabel="true" itemValue="#{true}" />
+								<f:selectItem itemLabel="false" itemValue="#{false}" />
+							</p:selectOneMenu>
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column headerText="#{msg['company.company']}">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{plane.company.companyName}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:selectOneMenu id="company" value="#{plane.company}"
+								converter="companyConverter">
+								<f:selectItems value="#{planesBean.companyList}" var="company"
+									itemLabel="#{company.companyName}" itemValue="#{company}" />
+							</p:selectOneMenu>
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column style="width:32px">
+					<p:rowEditor />
+				</p:column>
+
+			</p:dataTable>
+
+		</h:form>
+
+
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	template="templates/template.xhtml">
+
+	<ui:define name="content">
+		<h:form id="form">
+			<p:growl id="msgs" showDetail="true" />
+
+			<p:panelGrid columns="1">
+				<p:commandLink styleClass="buttonLink"
+					update=":mainForm:form:addCompany"
+					oncomplete="PF('addCompanyDialog').show()"
+					title="#{msg['managecompanies.link']}"
+					value="#{msg['managecompanies.link']}">
+				</p:commandLink>
+			</p:panelGrid>
+
+			<p:dialog header="#{msg['managecompanies.popUp']}"
+				widgetVar="addCompanyDialog" showEffect="blind" hideEffect="explode"
+				resizable="false" height="350" width="500">
+
+				<p:outputPanel id="addCompany" style="text-align:center;">
+					<p:panelGrid columns="2">
+						<h:outputLabel value="#{msg['managecompanies.companyName']} " />
+						<p:inputText value="#{manageCompanies.companyName}">
+							<f:validator validatorId="CompanyNameValidator" />
+						</p:inputText>
+
+						<h:outputLabel value="#{msg['managecompanies.address']} " />
+						<p:inputText value="#{manageCompanies.address}">
+							<f:validator validatorId="AddressValidator" />
+						</p:inputText>
+
+						<h:outputLabel value="#{msg['managecompanies.phone']} " />
+						<p:inputText value="#{manageCompanies.phone}">
+							<f:validator validatorId="PhoneValidator" />
+						</p:inputText>
+
+						<h:outputLabel value="#{msg['managecompanies.email']} " />
+						<p:inputText value="#{manageCompanies.email}">
+							<f:validator validatorId="EmailValidator" />
+						</p:inputText>
+
+						<f:facet name="footer">
+							<h:commandButton value="#{msg['managecompanies.addCompany']}"
+								action="#{manageCompanies.addCompany}">
+							</h:commandButton>
+
+						</f:facet>
+					</p:panelGrid>
+				</p:outputPanel>
+			</p:dialog>
+
+			<p:dataTable id="companies1" var="company"
+				value="#{manageCompanies.companiesList}" editable="true"
+				style="margin-bottom:20px" scrollable="true" scrollHeight="600">
+
+				<f:facet name="header">
+       			   Manage Companies
+       			</f:facet>
+
+				<p:ajax event="rowEdit" listener="#{manageCompanies.onRowEdit}"
+					update="#{p:component('msgs')}" />
+				<p:ajax event="rowEditCancel"
+					listener="#{manageCompanies.onRowCancel}"
+					update="#{p:component('msgs')}" />
+
+				<p:column headerText="#{msg['managecompanies.companyName']}">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{company.companyName}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText id="modelInput" value="#{company.companyName}"
+								style="width:100%" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column headerText="#{msg['managecompanies.address']}">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{company.address}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{company.address}" style="width:100%"
+								label="Company" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column headerText="#{msg['managecompanies.phone']}">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{company.phone}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{company.phone}" style="width:100%"
+								label="Phone" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+
+				<p:column headerText="#{msg['managecompanies.email']}">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{company.email}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{company.email}" style="width:100%"
+								label="Email">
+							</p:inputText>
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column headerText="#{msg['managecompanies.status']}">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{company.status}" />
+						</f:facet>
+						<f:facet name="input">
+							<h:selectOneMenu value="#{company.status}" style="width:100%">
+								<f:selectItems value="#{manageCompanies.stats}" var="stat"
+									itemLabel="#{stat}" itemValue="#{stat}" />
+							</h:selectOneMenu>
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column style="width:32px">
+					<p:rowEditor />
+				</p:column>
+			</p:dataTable>
+
+
+
+
+		</h:form>
+	</ui:define>
+</ui:composition>

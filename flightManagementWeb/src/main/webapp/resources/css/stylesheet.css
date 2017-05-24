@@ -1,0 +1,73 @@
+#loginDiv {
+	width: 40%;
+	margin: 0 auto;
+	color: white;
+	background-color: transparent;
+	margin: 0 auto;
+	text-align: center;
+}
+
+table {
+	margin: 0 auto;
+	background: transparent;
+	border: none;
+	border-radius: 20px;
+}
+
+tr {
+	background-color: transparent;
+}
+
+body {
+	background-image: url("#{resource['img/background.jpg']}");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+form {
+	background-color: transparent;
+}
+
+.ui-inputfield {
+	background-color: transparent;
+	margin: 5px;
+	padding: 5px;
+}
+
+.myInput {
+	background-color: rgba(255, 255, 255, 0.2);
+	color: white;
+	border: none;
+	border-radius: 15px;
+	margin: 2px;
+	text-align: center;
+	padding: 2px;
+}
+
+.myButton {
+	background-color: white;
+	color: black;
+	border: none;
+	border-radius: 5px;
+	margin: 10 auto;
+	width: 20%;
+}
+
+.title {
+	font-size: 4em;
+}
+
+#info {
+	font-size: 1.3em;
+	margin: 5px;
+}
+
+span.ui-messages-error-icon {
+	display: none;
+}
+
+.ui-messages-error.ui-corner-all {
+	background-color: transparent;
+	border: none;
+	color: #e89f9f;
+}

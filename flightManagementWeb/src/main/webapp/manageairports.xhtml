@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="templates/template.xhtml">
+
+	<ui:define name="content">
+		<h:form id="form">
+			<p:growl id="msgs" showDetail="true" />
+
+			<p:panelGrid columns="1">
+				<p:commandLink styleClass="buttonLink"
+					update=":mainForm:form:addAirport"
+					oncomplete="PF('addAirportDialog').show()"
+					title="#{msg['manageairports.link']}"
+					value="#{msg['manageairports.link']}">
+				</p:commandLink>
+			</p:panelGrid>
+
+
+			<p:dialog header="#{msg['manageairports.popUp']}"
+				widgetVar="addAirportDialog" showEffect="blind" hideEffect="explode"
+				resizable="false" height="350" width="500">
+
+				<p:outputPanel id="addAirport" style="text-align:center;">
+					<p:panelGrid columns="2">
+						<h:outputLabel value="#{msg['manageairports.airportName']} " />
+						<p:inputText value="#{manageAirports.airportName}" />
+
+						<h:outputLabel value="#{msg['manageairports.country']} " />
+						<p:inputText value="#{manageAirports.country}">
+							<f:validator validatorId="CountryValidator" />
+						</p:inputText>
+
+						<h:outputLabel value="#{msg['manageairports.city']} " />
+						<p:inputText value="#{manageAirports.city}">
+							<f:validator validatorId="CityValidator" />
+						</p:inputText>
+
+						<h:outputLabel value="#{msg['manageairports.address']} " />
+						<p:inputText value="#{manageAirports.address}">
+							<f:validator validatorId="AddressValidator" />
+						</p:inputText>
+
+
+						<f:facet name="footer">
+							<h:commandButton value="#{msg['manageairports.addNewAirport']}"
+								action="#{manageAirports.addAirport}">
+							</h:commandButton>
+
+						</f:facet>
+					</p:panelGrid>
+				</p:outputPanel>
+			</p:dialog>
+		</h:form>
+
+		<h:form id="form2">
+			<p:growl id="msgss" showDetail="true" />
+			<p:dataTable id="airports1" var="airport"
+				value="#{manageAirports.airportsList}" editable="true"
+				style="margin-bottom:20px" scrollable="true" scrollHeight="800">
+
+				<f:facet name="header">
+         			 Manage Airports
+      			 </f:facet>
+
+				<p:ajax event="rowEdit" listener="#{manageAirports.onRowEdit}"
+					update="#{p:component('msgss')}" />
+				<p:ajax event="rowEditCancel"
+					listener="#{manageAirports.onRowCancel}"
+					update="#{p:component('msgss')}" />
+
+				<p:column headerText="#{msg['manageairports.airportName']}">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{airport.airportName}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText id="modelInput" value="#{airport.airportName}"
+								style="width:100%" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column headerText="#{msg['manageairports.country']}">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{airport.country}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{airport.country}" style="width:100%"
+								label="Year" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column headerText="#{msg['manageairports.city']}">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{airport.city}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{airport.city}" style="width:100%"
+								label="Year" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+
+				<p:column headerText="#{msg['manageairports.address']}">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{airport.address}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{airport.address}" style="width:100%"
+								label="Year" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column headerText="#{msg['manageairports.status']}">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{airport.status}" />
+						</f:facet>
+						<f:facet name="input">
+							<h:selectOneMenu value="#{airport.status}" style="width:100%">
+								<f:selectItems value="#{manageAirports.stats}" var="stat"
+									itemLabel="#{stat}" itemValue="#{stat}" />
+							</h:selectOneMenu>
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column style="width:32px">
+					<p:rowEditor />
+				</p:column>
+
+				<p:column style="width:100px">
+					<p:column>
+						<p:commandButton icon="ui-icon-trash" process="@this,airports1"
+							actionListener="#{manageAirports.rowDelete(airport)}"
+							update="#{p:component('msgss')}  #{p:component('airports1')}">
+							<p:confirm header="Confirmation" message="Are you sure?"
+								icon="ui-icon-alert" />
+						</p:commandButton>
+
+						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+							<p:commandButton value="Yes" type="button"
+								styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+							<p:commandButton value="No" type="button"
+								styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+						</p:confirmDialog>
+					</p:column>
+				</p:column>
+
+			</p:dataTable>
+
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
+
+
+
+
+

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:form>
+		<f:view locale="#{languageBean.localeCode}"/>
+		<p:growl id="messages" showDetail="true">
+
+			<p:slideMenu>
+				<p:menuitem value="#{msg['menu.home']}" url="index.xhtml"
+					icon="fa fa-home" />
+				<p:menuitem value="#{userName}" url="personalData.xhtml"
+					icon="fa fa-user" />
+
+				<p:menuitem value="#{msg['menu.manageUsers']}"
+					url="manageusers.xhtml" icon="fa fa-users" />
+				<p:menuitem value="#{msg['menu.seeFlights']}"
+					url="manageflights.xhtml" icon="fa fa-exchange" />
+				<p:menuitem value="#{msg['menu.createTemplate']}"
+					url="flighttemplate.xhtml" icon="fa fa-bookmark" />
+				<p:menuitem value="#{msg['menu.flightHistory']}"
+					url="flightHistory.xhtml" icon="fa fa-history" />
+				<p:menuitem value="#{msg['menu.assign']}" url="crewassignment.xhtml"
+					icon="fa fa-user-plus" />
+				<p:menuitem value="#{msg['menu.planes']}" url="manageplanes.xhtml"
+					icon="fa fa-plane" />
+				<p:menuitem value="#{msg['menu.airports']}"
+					url="manageairports.xhtml" icon="fa fa-map-marker" />
+				<p:menuitem value="#{msg['menu.itineraries']}"
+					url="manageitineraries.xhtml" icon="fa fa-calendar" />
+				<p:menuitem value="#{msg['menu.reports']}" url="reports.xhtml"
+					icon="fa fa-bar-chart" />
+				<p:menuitem value="#{msg['menu.logout']}"
+					action="#{logOutBean.processLogOut}" icon="fa fa-power-off" />
+			</p:slideMenu>
+
+
+
+		</p:growl>
+	</h:form>
+
+</ui:composition>

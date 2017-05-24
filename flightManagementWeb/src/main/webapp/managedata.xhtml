@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://java.sun.com/jsf/core"
+    template="templates/template.xhtml">
+
+<ui:define name="content">
+
+
+ 		<h:form id="id" enctype="multipart/form-data">
+     <p:growl id="msgs" showDetail="true" />
+ 
+        <h:panelGrid columns="2" cellpadding="5">
+        	 
+       	<h:outputText value="Select table to import/export and then click the submit button" />
+        <p:selectOneButton value="#{uploadFileBean.option}" id="table">
+            <f:selectItem itemLabel="Plane" itemValue="Plane" />
+            <f:selectItem itemLabel="User" itemValue="User" />
+            <f:selectItem itemLabel="Airport" itemValue="Airport" />
+            <f:selectItem itemLabel="Company" itemValue="Company" />
+            <f:selectItem itemLabel="Flight" itemValue="Flight"/>
+            <f:selectItem itemLabel="Itinerary" itemValue="Itinerary"/>
+        </p:selectOneButton>
+        
+        <p:commandButton value="Submit"  update="display" icon="ui-icon-check" />
+        <p:spacer />
+ 
+        <h:outputText value="Selected:" />
+        <h:outputText id="display" value="#{uploadFileBean.option}" style="font-weight: bold" />
+        
+        </h:panelGrid>
+        
+      
+ 
+
+ 		<h:outputText value="Choose .csv files containing the data you want to import and then click the upload button" />	
+ 		<h:outputText value="You can import more files at once, but make sure they contain data coresponding to the same table" />	
+        <p:fileUpload fileUploadListener="#{uploadFileBean.handleFileUpload}" mode="advanced" allowTypes="/(\.|\/)(csv)$/" dragDropSupport="false"
+           update="#{p:component('msgs')}" />
+        
+        <h:outputText value="Click the download button if you want to export the data from the selected table" />	
+  		<p:commandButton id="downloadLink" value="Download" ajax="false" 
+  		actionListener="#{uploadFileBean.prepDownload}" onclick="handleRequest();">
+    		<p:fileDownload value="#{uploadFileBean.download}" />
+  		</p:commandButton>
+
+
+    
+	</h:form>
+	
+
+</ui:define>
+
+</ui:composition> 

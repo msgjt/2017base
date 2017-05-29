@@ -1,27 +1,25 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>edu.msg.flightManagement</groupId>
-  <artifactId>flightManagement</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>pom</packaging>
-  
-  <properties>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>edu.msg.jbugs</groupId>
+	<artifactId>jbugs</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<properties>
 		<project.build.sourceEconding>UTF-8</project.build.sourceEconding>
 		<java.source>1.8</java.source>
 		<java.target>1.8</java.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
-	
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>edu.msg.flightManagement</groupId>
-				<artifactId>flightManagementEjb</artifactId>
+				<groupId>edu.msg.jbugs</groupId>
+				<artifactId>jbugsEjb</artifactId>
 				<version>${project.version}</version>
 				<type>ejb</type>
 			</dependency>
-
 			<dependency>
 				<groupId>javax</groupId>
 				<artifactId>javaee-api</artifactId>
@@ -46,9 +44,9 @@
 		</pluginManagement>
 	</build>
 	<modules>
-		<module>flightManagementEjb</module>
-		<module>flightManagementEar</module>
-		<module>flightManagementWeb</module>
-		<module>flightManagementEjbClient</module>
+		<module>jbugsEjb</module>
+		<module>jbugsEar</module>
+		<module>jbugsWeb</module>
+		<module>jbugsEjbClient</module>
 	</modules>
 </project>

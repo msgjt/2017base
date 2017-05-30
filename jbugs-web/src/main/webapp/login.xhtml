@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<f:view>
+	<h:head>
+		<title>Login</title>
+	</h:head>
+	<h:body>
+		<f:facet name="last">
+			<h:outputStylesheet library="css" name="stylesheet.css" />
+		</f:facet>
+		<h:panelGroup layout="block" id="loginDiv">
+			<div align="center">
+				<h:outputText value="JBugs"/>
+			</div>
+			<br />
+			<h:form id="loginForm">
+				<div align="center">
+					<h:panelGrid columns="1">
+						<h:outputLabel for="username" value="Username:" />
+						<p:inputText id="userName" value="#{loginBean.userName}" label="username"/>
+						<h:outputLabel for="username" value="Password:" />
+						<p:password id="password" value="#{loginBean.password}" label="password"/>
+					</h:panelGrid>
+					<p:commandButton id="submit" value="Login"
+							action="#{loginBean.processLogin}"></p:commandButton>
+					<p:messages />
+				</div>
+			</h:form>
+		</h:panelGroup>
+	</h:body>
+</f:view>
+</html>

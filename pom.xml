@@ -1,5 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>edu.msg.jbugs</groupId>
 	<artifactId>jbugs</artifactId>
@@ -16,7 +16,7 @@
 		<dependencies>
 			<dependency>
 				<groupId>edu.msg.jbugs</groupId>
-				<artifactId>jbugsEjb</artifactId>
+				<artifactId>jbugs-business</artifactId>
 				<version>${project.version}</version>
 				<type>ejb</type>
 			</dependency>
@@ -44,9 +44,10 @@
 		</pluginManagement>
 	</build>
 	<modules>
-		<module>jbugsEjb</module>
-		<module>jbugsEar</module>
-		<module>jbugsWeb</module>
-		<module>jbugsEjbClient</module>
-	</modules>
+		<module>jbugs-persistence</module>
+		<module>jbugs-business</module>
+		<module>jbugs-ear</module>
+		<module>jbugs-web</module>
+		<module>jbugs-services</module>
+  </modules>
 </project>

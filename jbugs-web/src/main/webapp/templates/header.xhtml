@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<center>
+		<h:outputText value="#{msg['header.title']}" />
+		<h:form>
+			<p:selectOneMenu id="languageMenu" value="#{languageProviderBean.localeCode}"
+				styleClass="languageMenu" onchange="submit()"
+				valueChangeListener="#{languageProviderBean.countryLocaleCodeChanged}"
+				var="locale">
+				<f:selectItems value="#{languageProviderBean.countries}" var="lang" />
+				<p:column style="width:100%">
+					<p:graphicImage width="30" height="30" library="img"
+						name="flag_#{locale}.png" />
+				</p:column>
+			</p:selectOneMenu>
+		</h:form>
+	</center>
+</ui:composition>

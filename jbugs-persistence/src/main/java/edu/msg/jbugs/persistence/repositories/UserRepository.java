@@ -1,7 +1,19 @@
+/**
+ *  Copyright (C) 2017 java training
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package edu.msg.jbugs.persistence.repositories;
 
 import java.util.List;
-
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -17,7 +29,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import edu.msg.jbugs.persistence.entities.UserEntity;
-import edu.msg.jbugs.util.PasswordEncrypter;
 
 @Stateless(name = "UserRepository", mappedName = "ejb/UserRepository")
 @LocalBean
@@ -35,7 +46,7 @@ public class UserRepository {
 
 		} catch (PersistenceException e) {
 			logger.error("UserEntity insertion failed", e);
-			throw new RepositoryException("UserEntity insertion failed",e);
+			throw new RepositoryException("UserEntity insertion failed", e);
 		}
 	}
 
@@ -48,7 +59,7 @@ public class UserRepository {
 			return user;
 		} catch (PersistenceException e) {
 			logger.error("UserEntitys retrieval by id failed", e);
-			throw new RepositoryException("UserEntitys retrieval by id failed",e);
+			throw new RepositoryException("UserEntitys retrieval by id failed", e);
 		}
 
 	}
@@ -61,7 +72,7 @@ public class UserRepository {
 			return user;
 		} catch (PersistenceException e) {
 			logger.error("UserEntity update failed ", e);
-			throw new RepositoryException("UserEntity update failed ",e);
+			throw new RepositoryException("UserEntity update failed ", e);
 		}
 	}
 
@@ -73,7 +84,7 @@ public class UserRepository {
 
 		} catch (PersistenceException e) {
 			logger.error("UserEntity deletion failed ", e);
-			throw new RepositoryException("UserEntity deletion failed ",e);
+			throw new RepositoryException("UserEntity deletion failed ", e);
 		}
 	}
 
@@ -86,7 +97,7 @@ public class UserRepository {
 			}
 		} catch (PersistenceException e) {
 			logger.error("UserEntitys deletion by id failed ", e);
-			throw new RepositoryException("UserEntitys deletion by id failed ",e);
+			throw new RepositoryException("UserEntitys deletion by id failed ", e);
 		}
 	}
 
@@ -101,25 +112,27 @@ public class UserRepository {
 
 		} catch (PersistenceException e) {
 			logger.error("UserEntitys retrieval failed", e);
-			throw new RepositoryException("UserEntitys retrieval failed",e);
+			throw new RepositoryException("UserEntitys retrieval failed", e);
 		}
 	}
 
 	public List<UserEntity> findByType(String type) {
 		try {
-			TypedQuery<UserEntity> query = entityManager.createQuery("SELECT u FROM user u WHERE u.type = :type", UserEntity.class);
+			TypedQuery<UserEntity> query = entityManager.createQuery("SELECT u FROM user u WHERE u.type = :type",
+					UserEntity.class);
 			query.setParameter("type", type);
 			return query.getResultList();
 
 		} catch (PersistenceException e) {
 			logger.error("UserEntitys retrieval by type failed", e);
-			throw new RepositoryException("UserEntitys retrieval by type failed",e);
+			throw new RepositoryException("UserEntitys retrieval by type failed", e);
 		}
 	}
 
 	public String validateUserNameAndPassword(String userName, String password) {
 		try {
-			//password = PasswordEncrypter.getGeneratedHashedPassword(password, "");
+			// password = PasswordEncrypter.getGeneratedHashedPassword(password,
+			// "");
 			TypedQuery<UserEntity> query = entityManager.createQuery(
 					"SELECT u FROM UserEntity u WHERE u.userName = :userName AND u.password = :password AND u.status = true",
 					UserEntity.class);
@@ -134,15 +147,15 @@ public class UserRepository {
 			}
 		} catch (PersistenceException e) {
 			logger.error("Validation of username and password failed", e);
-			throw new RepositoryException("Validation of username and password failed",e);
+			throw new RepositoryException("Validation of username and password failed", e);
 		}
 
 	}
 
 	public UserEntity getByUserEntityName(String userName) {
 		try {
-			TypedQuery<UserEntity> query = entityManager.createQuery("SELECT u FROM user u WHERE u.userName = :userName",
-					UserEntity.class);
+			TypedQuery<UserEntity> query = entityManager
+					.createQuery("SELECT u FROM user u WHERE u.userName = :userName", UserEntity.class);
 			query.setParameter("userName", userName);
 			List<UserEntity> users = query.getResultList();
 			if (users.size() == 1) {
@@ -152,8 +165,8 @@ public class UserRepository {
 			}
 		} catch (PersistenceException e) {
 			logger.error("UserEntity retrieval by Name failed", e);
-			throw new RepositoryException("UserEntity retrieval by Name failed",e);
+			throw new RepositoryException("UserEntity retrieval by Name failed", e);
 		}
 	}
-	
+
 }

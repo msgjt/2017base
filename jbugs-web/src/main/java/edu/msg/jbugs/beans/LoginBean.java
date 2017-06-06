@@ -40,21 +40,22 @@ public class LoginBean implements Serializable {
 	private static final String OK = "OK";
 	private static final String MENUXHTML = "menu.xhtml";
 	private static final String MENUFILE = "menuFile";
-	
+
 	private String userName;
 	private String password;
 	private String userType = "";
 
 	@EJB
 	private UserService userService;
-	
+
 	public String processLogin() {
 		try {
 			userType = userService.login(userName, password);
 		} catch (RemoteException e) {
-			LOG.error(e.getMessage(),e);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-					LabelProvider.getLabel(MessageConstants.ERROR), LabelProvider.getLabel(MessageConstants.ERROR_VALIDATELOGIN)));
+			LOG.error(e.getMessage(), e);
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, LabelProvider.getLabel(MessageConstants.ERROR),
+							LabelProvider.getLabel(MessageConstants.ERROR_VALIDATELOGIN)));
 		}
 
 		if (!userType.isEmpty()) {
@@ -77,7 +78,8 @@ public class LoginBean implements Serializable {
 		HttpSession session = getSession();
 		session.setAttribute(MessageConstants.USER_TYPE, userType);
 		session.setAttribute(MessageConstants.USER_NAME, userName);
-		//session.setAttribute(MENUFILE, userType.replaceAll("\\s", "") + MENUXHTML);
+		// session.setAttribute(MENUFILE, userType.replaceAll("\\s", "") +
+		// MENUXHTML);
 		session.setAttribute(MENUFILE, "default-" + MENUXHTML);
 		return NavigationConstants.LOGIN_OK;
 	}

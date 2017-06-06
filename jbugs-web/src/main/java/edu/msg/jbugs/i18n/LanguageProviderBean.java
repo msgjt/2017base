@@ -37,6 +37,7 @@ public class LanguageProviderBean implements Serializable {
 	private String localeCode;
 
 	private transient Map<String, Object> countries;
+
 	@PostConstruct
 	public void init() {
 		ResourceBundle rb = ResourceBundle.getBundle("messages",

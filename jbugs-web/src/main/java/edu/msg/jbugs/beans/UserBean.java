@@ -62,7 +62,6 @@ public class UserBean implements Serializable {
 		this.userName = userName;
 	}
 
-	
 	public String getType() {
 		return type;
 	}
@@ -78,7 +77,6 @@ public class UserBean implements Serializable {
 	public void setUser(UserDTO user) {
 		this.user = user;
 	}
-
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;

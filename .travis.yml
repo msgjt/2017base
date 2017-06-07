@@ -3,7 +3,7 @@ sudo: false
 install: true
 addons:
   sonarqube:
-    organization: "msgjt"
+    organization: "msg-jtr2017"
     branches:
       - master
       - develop

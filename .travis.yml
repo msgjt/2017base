@@ -4,6 +4,11 @@ install: true
 addons:
   sonarqube:
     organization: "msgjt-github"
+    branches:
+      - master
+      - develop
+script:
+  - sonar-scanner
 jdk:
   - oraclejdk8
 script:

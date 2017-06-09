@@ -26,9 +26,6 @@ import edu.msg.jbugs.dtos.UserDTO;
 @ManagedBean(name = "userBean")
 @ViewScoped
 public class UserBean implements Serializable {
-
-	private static final Logger LOG = LoggerFactory.getLogger(UserBean.class);
-
 	private static final long serialVersionUID = 7580127801947224916L;
 
 	private UserDTO user;

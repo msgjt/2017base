@@ -34,6 +34,7 @@ public class UserEjb implements UserService, Serializable {
      * Default constructor. 
      */
     public UserEjb() {
+    	// Default constructor
     }
 
 	@Override

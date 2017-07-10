@@ -13,6 +13,7 @@
  */
 package edu.msg.jbugs.persistence.repositories;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -32,7 +33,12 @@ import edu.msg.jbugs.persistence.entities.UserEntity;
 
 @Stateless(name = "UserRepository", mappedName = "ejb/UserRepository")
 @LocalBean
-public class UserRepository {
+public class UserRepository implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private static Logger logger = LoggerFactory.getLogger(UserRepository.class);
 

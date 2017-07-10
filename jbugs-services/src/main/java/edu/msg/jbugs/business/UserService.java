@@ -13,9 +13,11 @@
  */
 package edu.msg.jbugs.business;
 
+import java.io.Serializable;
+
 import javax.ejb.Local;
 
 @Local
-public interface UserService {
+public interface UserService extends Serializable {
 	String login(String userName, String password);
 }
